@@ -10,7 +10,7 @@ namespace Fes\Money;
 use Fes\Money\Currency\CurrencyInterface;
 use Fes\Money\Currency\CurrencyWithSymbolInterface;
 use Fes\Money\Exception\DifferentCurrencyException;
-use Fes\Money\Exception\SubstractGreaterAmountException;
+use Fes\Money\Exception\SubtractGreaterAmountException;
 
 class Money implements MoneyInterface
 {
@@ -52,7 +52,7 @@ class Money implements MoneyInterface
     /**
      * @param Money $money
      * @throws DifferentCurrencyException
-     * @throws SubstractGreaterAmountException
+     * @throws SubtractGreaterAmountException
      */
     public function subtract(Money $money)
     {
@@ -61,7 +61,7 @@ class Money implements MoneyInterface
         }
 
         if ($this->amount < $money->getAmount()) {
-            throw new SubstractGreaterAmountException();
+            throw new SubtractGreaterAmountException();
         }
 
         $this->amount -= $money->getAmount();
