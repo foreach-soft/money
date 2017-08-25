@@ -8,7 +8,6 @@ declare(strict_types=1);
 namespace Fes\Money;
 
 use Fes\Money\Currency\CurrencyInterface;
-use Fes\Money\Currency\CurrencyWithSymbolInterface;
 use Fes\Money\Exception\DifferentCurrencyException;
 use Fes\Money\Exception\SubtractGreaterAmountException;
 
