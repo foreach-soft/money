@@ -3,6 +3,7 @@
   "description": "Money library",
   "type": "library",
   "license": "MIT",
+  "homepage": "https://github.com/foreach-soft/money",
   "authors": [
     {
       "name": "Itach1Uchixa",
