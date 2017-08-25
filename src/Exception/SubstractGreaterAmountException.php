@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Fes\Money\Exception;
 
-class SubtractingBiggerAmountException extends Exception
+class SubstractGreaterAmountException extends Exception
 {
     protected $message = "Can't subtract big amount from small amount.";
 }
