@@ -1,0 +1,21 @@
+{
+  "name": "fes/money",
+  "description": "Money library",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Itach1Uchixa",
+      "email": "kakjavlon@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "beberlei/assert": "^2.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Fes\\Money\\": "src/"
+    }
+  }
+}
