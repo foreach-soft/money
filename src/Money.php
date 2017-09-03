@@ -32,7 +32,7 @@ class Money implements MoneyInterface
      */
     public function __construct(float $amount, CurrencyInterface $currency)
     {
-        Assertion::greaterOrEqualThan(0, $amount);
+        Assertion::greaterOrEqualThan($amount, 0);
 
         $this->amount = $amount;
         $this->currency = $currency;
