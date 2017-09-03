@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace Fes\Money;
 
+use Assert\Assertion;
 use Fes\Money\Currency\CurrencyInterface;
 use Fes\Money\Exception\DifferentCurrencyException;
 use Fes\Money\Exception\SubtractGreaterAmountException;
@@ -31,6 +32,8 @@ class Money implements MoneyInterface
      */
     public function __construct(float $amount, CurrencyInterface $currency)
     {
+        Assertion::greaterOrEqualThan(0, $amount);
+
         $this->amount = $amount;
         $this->currency = $currency;
     }
