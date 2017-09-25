@@ -40,23 +40,25 @@ class Money implements MoneyInterface
 
     /**
      * @param Money $money
+     * @return Money
      * @throws DifferentCurrencyException
      */
-    public function add(Money $money)
+    public function add(Money $money): Money
     {
         if ($money->getCurrency() != $this->currency) {
             throw new DifferentCurrencyException();
         }
 
-        $this->amount += $money->getAmount();
+        return new Money($this->amount + $money->getAmount(), $this->currency);
     }
 
     /**
      * @param Money $money
+     * @return Money
      * @throws DifferentCurrencyException
      * @throws SubtractGreaterAmountException
      */
-    public function subtract(Money $money)
+    public function subtract(Money $money): Money
     {
         if ($money->getCurrency() != $this->currency) {
             throw new DifferentCurrencyException();
@@ -66,7 +68,7 @@ class Money implements MoneyInterface
             throw new SubtractGreaterAmountException();
         }
 
-        $this->amount -= $money->getAmount();
+        return new Money($this->amount - $money->getAmount(), $this->currency);
     }
 
     /**
