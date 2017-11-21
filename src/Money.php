@@ -79,7 +79,7 @@ class Money implements MoneyInterface
      * @return Money
      * @throws DifferentCurrencyException
      */
-    public function subtract(Money $money): Money
+    public function subtract(self $money): self
     {
         if ($money->getCurrency() != $this->currency &&
             !$money instanceof NullCurrencyInterface &&
