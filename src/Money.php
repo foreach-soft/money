@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace Fes\Money;
 
+use Assert\Assertion;
 use Fes\Money\Currency\Currencies\Null;
 use Fes\Money\Currency\CurrencyInterface;
 use Fes\Money\Currency\HasStandardFormInterface;
@@ -91,6 +92,29 @@ class Money implements MoneyInterface
             $this->amount - $money->getAmount(),
             !$this->currency instanceof NullCurrencyInterface ? $this->currency : $money->currency
         );
+    }
+    
+    /**
+     * @param float|int $times
+     * @return Money
+     */
+    public function multiply($times): self
+    {
+        Assertion::numeric($times, "Invalid argument. Argument must be numeric.");
+        
+        return new static($times * $this->amount, $this->currency);
+    }
+    
+    /**
+     * @param float|int $to
+     * @return Money
+     */
+    public function divide($to): self
+    {
+        Assertion::numeric($to, "Invalid argument. Argument must be numeric.");
+        Assertion::greaterThan($to, "Can not divide to zero.");
+        
+        return new static($this->amount / $to, $this->currency);
     }
 
     /**
