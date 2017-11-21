@@ -61,16 +61,13 @@ class Money implements MoneyInterface
      */
     public function add(self $money): self
     {
-        if ($money->getCurrency() != $this->currency &&
-            !$money instanceof NullCurrencyInterface &&
-            !$this->currency instanceof NullCurrencyInterface
-        ) {
+        if ($money->getCurrency() != $this->currency && !$money->isNull() && !$this->isNull()) {
             throw new DifferentCurrencyException();
         }
 
         return new static(
             $this->amount + $money->getAmount(),
-            !$this->currency instanceof NullCurrencyInterface ? $this->currency : $money->currency
+            !$this->isNull() ? $this->currency : $money->currency
         );
     }
 
@@ -81,16 +78,13 @@ class Money implements MoneyInterface
      */
     public function subtract(self $money): self
     {
-        if ($money->getCurrency() != $this->currency &&
-            !$money instanceof NullCurrencyInterface &&
-            !$this->currency instanceof NullCurrencyInterface
-        ) {
+        if ($money->getCurrency() != $this->currency && !$money->isNull() && !$this->isNull()) {
             throw new DifferentCurrencyException();
         }
     
         return new static(
-            $this->amount - $money->getAmount(),
-            !$this->currency instanceof NullCurrencyInterface ? $this->currency : $money->currency
+            $this->amount + $money->getAmount(),
+            !$this->isNull() ? $this->currency : $money->currency
         );
     }
     
