@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Fes\Money;
 
 use Assert\Assertion;
-use Fes\Money\Currency\Currencies\Null;
+use Fes\Money\Currency\Currencies\NullCurrency;
 use Fes\Money\Currency\CurrencyInterface;
 use Fes\Money\Currency\HasStandardFormInterface;
 use Fes\Money\Currency\NullCurrencyInterface;
@@ -43,7 +43,7 @@ class Money implements MoneyInterface
      */
     public static function null(): self
     {
-        return new static(0, new Null());
+        return new static(0, new NullCurrency());
     }
     
     /**

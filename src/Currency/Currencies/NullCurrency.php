@@ -10,7 +10,7 @@ namespace Fes\Money\Currency\Currencies;
 use Fes\Money\Currency\CurrencyInterface;
 use Fes\Money\Currency\NullCurrencyInterface;
 
-final class Null implements CurrencyInterface, NullCurrencyInterface
+final class NullCurrency implements CurrencyInterface, NullCurrencyInterface
 {
     /**
      * @inheritDoc
