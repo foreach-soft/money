@@ -10,9 +10,11 @@ namespace Fes\Money\Currency\Currencies;
 use Fes\Money\Currency\CurrencyInterface;
 use Fes\Money\Currency\ExchangeableCurrencyInterface;
 use Fes\Money\Currency\CurrencyWithSymbolInterface;
+use Fes\Money\Currency\HasNameInterface;
+use Fes\Money\Currency\HasStandardFormInterface;
 use Fes\Money\MoneyInterface;
 
-class Usd implements CurrencyInterface, CurrencyWithSymbolInterface, ExchangeableCurrencyInterface
+class Usd implements CurrencyInterface, HasNameInterface, HasStandardFormInterface, CurrencyWithSymbolInterface, ExchangeableCurrencyInterface
 {
     const STRING      = "\x24";
     const NAME        = "US Dollar";

@@ -10,9 +10,11 @@ namespace Fes\Money\Currency\Currencies;
 use Fes\Money\Currency\CurrencyInterface;
 use Fes\Money\Currency\CurrencyWithSymbolInterface;
 use Fes\Money\Currency\ExchangeableCurrencyInterface;
+use Fes\Money\Currency\HasNameInterface;
+use Fes\Money\Currency\HasStandardFormInterface;
 use Fes\Money\MoneyInterface;
 
-class Rub implements CurrencyInterface, ExchangeableCurrencyInterface, CurrencyWithSymbolInterface
+class Rub implements CurrencyInterface, HasNameInterface, HasStandardFormInterface, ExchangeableCurrencyInterface, CurrencyWithSymbolInterface
 {
     const STRING      = "руб.";
     const NAME        = "ruble";

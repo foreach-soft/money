@@ -9,9 +9,11 @@ namespace Fes\Money\Currency\Currencies;
 
 use Fes\Money\Currency\CurrencyInterface;
 use Fes\Money\Currency\ExchangeableCurrencyInterface;
+use Fes\Money\Currency\HasNameInterface;
+use Fes\Money\Currency\HasStandardFormInterface;
 use Fes\Money\MoneyInterface;
 
-class Uzs implements CurrencyInterface, ExchangeableCurrencyInterface
+class Uzs implements CurrencyInterface, HasNameInterface, HasStandardFormInterface, ExchangeableCurrencyInterface
 {
     const STRING      = "so'm";
     const NAME        = "Uzbekistan Som";

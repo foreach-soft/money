@@ -7,10 +7,11 @@ declare(strict_types=1);
 
 namespace Fes\Money;
 
-use Assert\Assertion;
+use Fes\Money\Currency\Currencies\Null;
 use Fes\Money\Currency\CurrencyInterface;
+use Fes\Money\Currency\HasStandardFormInterface;
+use Fes\Money\Currency\NullCurrencyInterface;
 use Fes\Money\Exception\DifferentCurrencyException;
-use Fes\Money\Exception\SubtractGreaterAmountException;
 
 class Money implements MoneyInterface
 {
@@ -32,43 +33,64 @@ class Money implements MoneyInterface
      */
     public function __construct(float $amount, CurrencyInterface $currency)
     {
-        Assertion::greaterOrEqualThan($amount, 0);
-
         $this->amount = $amount;
         $this->currency = $currency;
     }
-
+    
     /**
-     * @param Money $money
      * @return Money
-     * @throws DifferentCurrencyException
      */
-    public function add(Money $money): Money
+    public static function null(): self
     {
-        if ($money->getCurrency() != $this->currency) {
-            throw new DifferentCurrencyException();
-        }
-
-        return new Money($this->amount + $money->getAmount(), $this->currency);
+        return new static(0, new Null());
+    }
+    
+    /**
+     * @return bool
+     */
+    public function isNull(): bool
+    {
+        return $this->amount == 0;
     }
 
     /**
      * @param Money $money
      * @return Money
      * @throws DifferentCurrencyException
-     * @throws SubtractGreaterAmountException
      */
-    public function subtract(Money $money): Money
+    public function add(self $money): self
     {
-        if ($money->getCurrency() != $this->currency) {
+        if ($money->getCurrency() != $this->currency &&
+            !$money instanceof NullCurrencyInterface &&
+            !$this->currency instanceof NullCurrencyInterface
+        ) {
             throw new DifferentCurrencyException();
         }
 
-        if ($this->amount < $money->getAmount()) {
-            throw new SubtractGreaterAmountException();
-        }
+        return new static(
+            $this->amount + $money->getAmount(),
+            !$this->currency instanceof NullCurrencyInterface ? $this->currency : $money->currency
+        );
+    }
 
-        return new Money($this->amount - $money->getAmount(), $this->currency);
+    /**
+     * @param Money $money
+     * @return Money
+     * @throws DifferentCurrencyException
+     */
+    public function subtract(Money $money): Money
+    {
+        if ($money->getCurrency() != $this->currency &&
+            !$money instanceof NullCurrencyInterface &&
+            !$this->currency instanceof NullCurrencyInterface
+        ) {
+            throw new DifferentCurrencyException();
+        }
+    
+        return new static(
+            $this->amount - $money->getAmount(),
+            !$this->currency instanceof NullCurrencyInterface ? $this->currency : $money->currency
+        );
     }
 
     /**
@@ -76,7 +98,15 @@ class Money implements MoneyInterface
      */
     public function __toString(): string
     {
-        return $this->currency->format($this);
+        if ($this->currency instanceof HasStandardFormInterface) {
+            return $this->currency->format($this);
+        }
+        
+        if ($this->currency instanceof NullCurrencyInterface) {
+            return (string) $this->amount;
+        }
+        
+        return (string) $this->amount . (string) $this->currency;
     }
 
     /**

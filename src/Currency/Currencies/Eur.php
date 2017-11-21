@@ -10,9 +10,11 @@ namespace Fes\Money\Currency\Currencies;
 use Fes\Money\Currency\CurrencyInterface;
 use Fes\Money\Currency\CurrencyWithSymbolInterface;
 use Fes\Money\Currency\ExchangeableCurrencyInterface;
+use Fes\Money\Currency\HasNameInterface;
+use Fes\Money\Currency\HasStandardFormInterface;
 use Fes\Money\MoneyInterface;
 
-class Eur implements CurrencyInterface, ExchangeableCurrencyInterface, CurrencyWithSymbolInterface
+class Eur implements CurrencyInterface, HasNameInterface, HasStandardFormInterface, ExchangeableCurrencyInterface, CurrencyWithSymbolInterface
 {
     const STRING      = "\xE2\x82\xAC";
     const NAME        = "Euro";
