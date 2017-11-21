@@ -112,7 +112,7 @@ class Money implements MoneyInterface
     public function divide($to): self
     {
         Assertion::numeric($to, "Invalid argument. Argument must be numeric.");
-        Assertion::greaterThan($to, "Can not divide to zero.");
+        Assertion::notEq($to, 0, "Can not divide to zero.");
         
         return new static($this->amount / $to, $this->currency);
     }
