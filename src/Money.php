@@ -83,7 +83,7 @@ class Money implements MoneyInterface
         }
     
         return new static(
-            $this->amount + $money->getAmount(),
+            $this->amount - $money->getAmount(),
             !$this->isNull() ? $this->currency : $money->currency
         );
     }
